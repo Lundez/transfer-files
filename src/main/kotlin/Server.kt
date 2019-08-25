@@ -6,24 +6,25 @@ import java.nio.channels.ServerSocketChannel
 private const val Port = 31415
 
 fun server(filename: String) {
-    println("Hi")
+    println("Server::init")
     val inetAddress = InetSocketAddress(Port)
     val serverSocketChannel = ServerSocketChannel.open()
 
     serverSocketChannel.bind(inetAddress)
-    println("binded")
     val socketChannel = serverSocketChannel.accept()
-    println("accedp")
-    val fileChannel: FileChannel = FileOutputStream("$filename.copy").channel
-    println("TransferFrom")
+    println("Server::Accepted Client")
+
+    val fileChannel: FileChannel = FileOutputStream("$filename.zip").channel
+    println("Server::Accepting file $filename")
     fileChannel.transferFrom(socketChannel, 0, Long.MAX_VALUE) // Create for-loop
-    println("TransferFrom done")
+    println("Server::Finished, shutting done")
     socketChannel.close()
     serverSocketChannel.close()
+    println("Server::Closed")
 }
 
 fun main(args: Array<String>) {
-    val fileName = "/home/lunde/Downloads/Bitwarden-1.15.2-x86_64(1).AppImage"
+    val fileName = "/home/lunde/Downloads"
     println(getLanIP())
     println(getExternalIP())
     server(fileName)
