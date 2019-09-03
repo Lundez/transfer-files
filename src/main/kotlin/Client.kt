@@ -1,3 +1,5 @@
+import org.apache.commons.compress.archivers.ArchiveInputStream
+import org.apache.commons.compress.archivers.examples.Archiver
 import java.io.File
 import java.io.FileInputStream
 import java.net.InetSocketAddress
@@ -9,6 +11,8 @@ import java.nio.file.Files
 import java.util.zip.ZipEntry
 import java.nio.file.Paths
 import java.util.zip.ZipOutputStream
+import org.apache.commons.compress.archivers.tar.TarArchiveEntry
+import org.apache.commons.compress.utils.ArchiveUtils
 
 
 private const val Port = 31415
@@ -62,5 +66,9 @@ fun client(filename: String) {
 
 fun main(args: Array<String>) {
     val fileName = "/home/londet/Downloads"
-    client(fileName)
+    val fileOut = File("/home/londet/Downloads.tar")
+    
+    //createTarGz(File(fileName), fileOut)
+
+    //client(fileName)
 }
